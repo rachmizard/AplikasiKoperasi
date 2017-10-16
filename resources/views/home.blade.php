@@ -16,6 +16,7 @@
 
                     You are logged in!
                     <a href="{{route('index.anggota')}}">Tabel Anggota</a>
+                    <a href="{{route('index.petugas')}}">Table petugas koperasi</a>
                 </div>
             </div>
         </div>
