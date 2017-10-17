@@ -33,6 +33,15 @@ Route::prefix('home/petugas')->group(function() {
 	Route::get('/hapusPetugas/{id}', 'PetugasController@destroy')->name('petugas.destroy')->middleware('auth');
 });
 
+Route::prefix('home/simpanan')->group(function() {
+	Route::get('/', 'SimpananController@index')->name('index.simpanan')->middleware('auth');
+	Route::get('/createSimpanan', 'SimpananController@create')->name('simpanan.create')->middleware('auth');
+	Route::post('/storeSimpanan', 'SimpananController@store')->name('simpanan.store')->middleware('auth');
+	Route::get('/editSimpanan/{id}', 'SimpananController@edit')->name('simpanan.edit')->middleware('auth');
+	Route::post('/updateSimpanan/{id}', 'SimpananController@update')->name('simpanan.update')->middleware('auth');
+	Route::get('/hapusSimpanan/{id}', 'SimpananController@destroy')->name('simpanan.destroy')->middleware('auth');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

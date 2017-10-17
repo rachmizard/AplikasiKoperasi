@@ -38,7 +38,7 @@ class AnggotaController extends Controller
     	$anggota->status = $request->status;
     	$anggota->no_tlp = $request->no_tlp;
     	$anggota->save();
-    	return redirect('home/anggota');
+    	return redirect('home/anggota')->with('message', 'Data berhasil di tambahkan');;
     }
 
     public function show() {
@@ -77,10 +77,16 @@ class AnggotaController extends Controller
 
     }
 
-    public function destroy($id){
-    	$anggota = Anggota::findOrfail($id);
-    	$anggota->delete();
-		return redirect('home/anggota')->with('messagehapus', 'Data berhasil di hapus!');    	
+    public function destroy(Request $request, $id){
+      $checked = $request->input('checked',[]);
+    
+        if ($checked == null) {
+          return redirect('home/anggota')->with('messagehapusgagal', 'Anda belum menceklis beberapa data untuk di hapus!');        
+        }else{
+          Anggota::whereIn("id",$checked)->delete();
+          return redirect('home/anggota')->with('messagehapus', 'Data berhasil di hapus!');        
+        }
+
     }
 
 

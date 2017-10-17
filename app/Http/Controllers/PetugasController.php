@@ -68,11 +68,18 @@ class PetugasController extends Controller
 
     }
 
-    public function destroy($id){
-    	$petugas = Petugaskoperasi::findOrfail($id);
-    	$petugas->delete();
-		return redirect('home/petugas')->with('messagehapus', 'Data berhasil di hapus!');    	
-    }
+
+    public function destroy(Request $request, $id){
+      $checked = $request->input('checked',[]);
+    
+        if ($checked == null) {
+          return redirect('home/petugas')->with('messagehapusgagal', 'Anda belum menceklis beberapa data untuk di hapus!');        
+        }else{
+          Petugas::whereIn("id",$checked)->delete();
+          return redirect('home/petugas')->with('messagehapus', 'Data berhasil di hapus!');        
+        }
+
+    }   
 
 
 }
