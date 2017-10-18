@@ -1,15 +1,21 @@
 @extends('layouts.app')
 
-@section('content')
-<div class="container">
+@section('dashboard')
+<div class="container-fluid">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{{route('index.anggota')}}">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">{{ route('index.anggota')}}</li>
+      </ol>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    <a href="{{route('simpanan.create')}}">Tambah simpanan</a>
-                    <a href="{{route('home')}}">Kembali</a>
+                    <a class="btn btn-sm btn-primary" href="{{route('simpanan.create')}}">Tambah simpanan</a>
+                    <a class="btn btn-sm btn-danger" href="{{route('home')}}">Kembali</a>
                 @if(session()->has('message'))
                     <div class="alert alert-success">
                         {{ session()->get('message') }}
@@ -30,10 +36,12 @@
                         {{ session()->get('messagehapusgagal') }}
                     </div>
                 @endif
+                <div class="table-responsive">
                 @foreach($simpanan as $got)
                 <form action="{{ route('simpanan.destroy', $got->id) }}">
                 @endforeach
-                    <table class="table">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
                         <tr>
                         <th>No</th>
                         <th>Nama Simpanan</th>
@@ -42,7 +50,9 @@
                         <th>Besar Simpanan</th>
                         <th>Keterangan</th>
                         <th>Aksi</th>
+                        <th>Select</th>
                         </tr>
+                    </thead>
                         <tbody> 
                         <tr>
                         @if($simpanan->count() > 0)
@@ -55,7 +65,9 @@
                         <td>{{ $in->ket }}</td>
                         <td>
                             <a href="{{ route('simpanan.edit', $in->id) }}">Edit</a>
-							<input class="form-check-input" type="checkbox" value="{{$in->id}}" name="checked[]">
+                        </td>
+                        <td>
+                            <input style="margin-left:10px;" class="form-check-input" type="checkbox" value="{{$in->id}}" name="checked[]">
                         </td>
                     	</tr>
                         @endforeach
@@ -66,6 +78,7 @@
 							<button class="btn btn-danger" type="submit">Hapus</button>
 							</form>
                         <div class="text-center">{{$simpanan->render()}}</div>
+                    </div>
                 </div>
             </div>
         </div>

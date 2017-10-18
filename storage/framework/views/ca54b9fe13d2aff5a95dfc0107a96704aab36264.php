@@ -1,5 +1,5 @@
-<?php $__env->startSection('content'); ?>
-<div class="container">
+<?php $__env->startSection('dashboard'); ?>
+<div class="container-fluid">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">

@@ -1,17 +1,23 @@
 @extends('layouts.app')
 
 @section('dashboard')
-<div class="container">
+<div class="container-fluid">
+  <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{{route('index.anggota')}}">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">{{ route('anggota.create')}}</li>
+  </ol>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
+                <div class="panel-heading">Dashboard tambah Anggota</div>
 
                 <div class="panel-body">
                     <form method="POST" action="{{ route('anggota.store') }}">
                         {{ csrf_field() }}
                       <div class="form-group">
-                        <label for="nama">Nama</label>
+                        <label for="nama">Nama anggota</label>
                         <input type="text" name='nama' class="form-control" id="nama" aria-describedby="nama" placeholder="Nama">
                         <small id="emailHelp" class="form-text text-muted">We'll never share your name with anyone else.</small>
                       </div>

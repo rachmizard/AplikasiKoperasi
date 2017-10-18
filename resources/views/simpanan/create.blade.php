@@ -1,7 +1,13 @@
 @extends('layouts.app')
 
-@section('content')
+@section('dashboard')
 <div class="container">
+  <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{{route('index.anggota')}}">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">{{ route('index.anggota')}}</li>
+  </ol>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">

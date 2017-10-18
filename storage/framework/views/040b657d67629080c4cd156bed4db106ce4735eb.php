@@ -1,13 +1,19 @@
-<?php $__env->startSection('content'); ?>
-<div class="container">
+<?php $__env->startSection('dashboard'); ?>
+<div class="container-fluid">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="<?php echo e(route('index.anggota')); ?>">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active"><?php echo e(route('index.anggota')); ?></li>
+      </ol>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    <a href="<?php echo e(route('simpanan.create')); ?>">Tambah simpanan</a>
-                    <a href="<?php echo e(route('home')); ?>">Kembali</a>
+                    <a class="btn btn-sm btn-primary" href="<?php echo e(route('simpanan.create')); ?>">Tambah simpanan</a>
+                    <a class="btn btn-sm btn-danger" href="<?php echo e(route('home')); ?>">Kembali</a>
                 <?php if(session()->has('message')): ?>
                     <div class="alert alert-success">
                         <?php echo e(session()->get('message')); ?>
@@ -32,10 +38,12 @@
 
                     </div>
                 <?php endif; ?>
+                <div class="table-responsive">
                 <?php $__currentLoopData = $simpanan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $got): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <form action="<?php echo e(route('simpanan.destroy', $got->id)); ?>">
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    <table class="table">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
                         <tr>
                         <th>No</th>
                         <th>Nama Simpanan</th>
@@ -44,7 +52,9 @@
                         <th>Besar Simpanan</th>
                         <th>Keterangan</th>
                         <th>Aksi</th>
+                        <th>Select</th>
                         </tr>
+                    </thead>
                         <tbody> 
                         <tr>
                         <?php if($simpanan->count() > 0): ?>
@@ -57,7 +67,9 @@
                         <td><?php echo e($in->ket); ?></td>
                         <td>
                             <a href="<?php echo e(route('simpanan.edit', $in->id)); ?>">Edit</a>
-							<input class="form-check-input" type="checkbox" value="<?php echo e($in->id); ?>" name="checked[]">
+                        </td>
+                        <td>
+                            <input style="margin-left:10px;" class="form-check-input" type="checkbox" value="<?php echo e($in->id); ?>" name="checked[]">
                         </td>
                     	</tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -68,6 +80,7 @@
 							<button class="btn btn-danger" type="submit">Hapus</button>
 							</form>
                         <div class="text-center"><?php echo e($simpanan->render()); ?></div>
+                    </div>
                 </div>
             </div>
         </div>

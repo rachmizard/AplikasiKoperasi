@@ -56,7 +56,7 @@
               </div>
               <div class="mr-5">Simpanan!</div>
             </div>
-            <a class="card-footer text-white clearfix small z-1" href="#">
+            <a class="card-footer text-white clearfix small z-1" href="{{route('index.simpanan')}}">
               <span class="float-left">View Table!</span>
               <span class="float-right">
                 <i class="fa fa-angle-right"></i>

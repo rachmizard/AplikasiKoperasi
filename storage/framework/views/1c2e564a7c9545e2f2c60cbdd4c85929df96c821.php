@@ -28,92 +28,43 @@
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
           <a class="nav-link" href="<?php echo e(route('home')); ?>">
-            <i class="fa fa-fw fa-dashboard"></i>
+            <i class="fa fa-fw fa-home"></i>
             <span class="nav-link-text">Dashboard</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="charts.html">
-            <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Charts</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="tables.html">
-            <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Tables</span>
           </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-wrench"></i>
-            <span class="nav-link-text">Components</span>
+            <i class="fa fa-fw fa-table"></i>
+            <span class="nav-link-text">Data</span>
           </a>
           <ul class="sidenav-second-level collapse" id="collapseComponents">
             <li>
-              <a href="navbar.html">Navbar</a>
+              <a href="<?php echo e(route('index.anggota')); ?>"><i class="fa fa-fw fa-group"></i> Anggota</a>
             </li>
             <li>
-              <a href="cards.html">Cards</a>
+              <a href="<?php echo e(route('index.petugas')); ?>"><i class="fa fa-fw fa-user"></i> Petugas Koperasi</a>
+            </li>
+            <li>
+              <a href="<?php echo e(route('index.simpanan')); ?>"><i class="fa fa-fw fa-money"></i> Simpanan</a>
             </li>
           </ul>
         </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseExamplePages" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-file"></i>
-            <span class="nav-link-text">Example Pages</span>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseAdd" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-plus-circle"></i>
+            <span class="nav-link-text">Tambah data</span>
           </a>
-          <ul class="sidenav-second-level collapse" id="collapseExamplePages">
+          <ul class="sidenav-second-level collapse" id="collapseAdd">
             <li>
-              <a href="login.html">Login Page</a>
+              <a href="<?php echo e(route('anggota.create')); ?>"><i class="fa fa-fw fa-plus-circle"></i> Tambah Anggota</a>
             </li>
             <li>
-              <a href="register.html">Registration Page</a>
+              <a href="<?php echo e(route('petugas.create')); ?>"><i class="fa fa-fw fa-plus-circle"></i> Tambah Petugas Koperasi</a>
             </li>
             <li>
-              <a href="forgot-password.html">Forgot Password Page</a>
-            </li>
-            <li>
-              <a href="blank.html">Blank Page</a>
+              <a href="<?php echo e(route('simpanan.create')); ?>"><i class="fa fa-fw fa-plus-circle"></i> Tambah Simpanan</a>
             </li>
           </ul>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Menu Levels">
-          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti" data-parent="#exampleAccordion">
-            <i class="fa fa-fw fa-sitemap"></i>
-            <span class="nav-link-text">Menu Levels</span>
-          </a>
-          <ul class="sidenav-second-level collapse" id="collapseMulti">
-            <li>
-              <a href="#">Second Level Item</a>
-            </li>
-            <li>
-              <a href="#">Second Level Item</a>
-            </li>
-            <li>
-              <a href="#">Second Level Item</a>
-            </li>
-            <li>
-              <a class="nav-link-collapse collapsed" data-toggle="collapse" href="#collapseMulti2">Third Level</a>
-              <ul class="sidenav-third-level collapse" id="collapseMulti2">
-                <li>
-                  <a href="#">Third Level Item</a>
-                </li>
-                <li>
-                  <a href="#">Third Level Item</a>
-                </li>
-                <li>
-                  <a href="#">Third Level Item</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-          <a class="nav-link" href="#">
-            <i class="fa fa-fw fa-link"></i>
-            <span class="nav-link-text">Link</span>
-          </a>
         </li>
       </ul>
       <ul class="navbar-nav sidenav-toggler">
@@ -148,6 +99,29 @@
   <?php echo $__env->yieldContent('dashboard'); ?>
 
 </div>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <form action="<?php echo e(route('logout')); ?>" method="POST">
+                <?php echo e(csrf_field()); ?>
+
+            <button class="btn btn-secondary" type="submit">Logout</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 <!-- Bootstrap core JavaScript--><!-- Bootstrap core JavaScript-->
     <script src="<?php echo e(asset('vendor/jquery/jquery.min.js')); ?>"></script>
     <script src="<?php echo e(asset('vendor/popper/popper.min.js')); ?>"></script>
