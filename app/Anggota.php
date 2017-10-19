@@ -14,4 +14,9 @@ class Anggota extends Model
         return $this->hasMany('App\Simpanan', 'id');
     }
 
+
+    public function pinjaman(){
+        return $this->hasMany('App\Pinjaman', 'id');
+    }
+
 }

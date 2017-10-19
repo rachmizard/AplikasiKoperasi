@@ -46,39 +46,20 @@
               <thead>
                 <tr>
                   <th>Nama</th>
-                  <th>Alamat</th>
-                  <th>Tanggal Lahir</th>
-                  <th>Tempat lahir</th>
-                  <th>Jenis Kelamin</th>
-                  <th>Status</th>
-                  <th>No telepon</th>
+                  <th>Email</th>
+                  <th>Password</th>
+                  <th>Role</th>
                   <th>Aksi</th>
                   <th>Select</th>
                 </tr>
               </thead>
-              <tfoot>
-                <tr>
-                  <th>Nama</th>
-                  <th>Alamat</th>
-                  <th>Tanggal Lahir</th>
-                  <th>Tempat lahir</th>
-                  <th>Jenis Kelamin</th>
-                  <th>Status</th>
-                  <th>No telepon</th>
-                  <th>Aksi</th>
-                  <th>Select</th>
-                </tr>
-              </tfoot>
               <tbody>
                 @foreach($anggota as $in)
                 <tr>
-                <td>{{ $in->nama }}</td>
-                <td>{{ $in->alamat }}</td>
-                <td>{{ $in->tgl_lhr }}</td>
-                <td>{{ $in->tmp_lahir }}</td>
-                <td>{{ $in->j_kelamin }}</td>
-                <td>{{ $in->status }}</td>
-                <td>{{ $in->no_tlp }}</td>
+                <td>{{ $in->name }}</td>
+                <td>{{ $in->email }}</td>
+                <td>{{ $in->password }}</td>
+                <td>{{ $in->role }}</td>
                 <td>
                     <a href="{{ route('anggota.edit', $in->id) }}">Edit</a>
                 </td>

@@ -51,6 +51,13 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'alamat' => 'required|string|min:2',
+            'tgl_lhr' => 'required|string|max:255',
+            'tmp_lahir' => 'required|string|max:255',
+            'j_kelamin' => 'required|string|max:255',
+            'status' => 'required|string|max:255',
+            'no_tlp' => 'required|string|max:255',
+            'role' => 'required|string|max:255',
         ]);
     }
 
@@ -66,6 +73,13 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'alamat' => $data['alamat'],
+            'tgl_lhr' => $data['tgl_lhr'],
+            'tmp_lahir' => $data['tmp_lahir'],
+            'j_kelamin' => $data['j_kelamin'],
+            'status' => $data['status'],
+            'no_tlp' => $data['no_tlp'],
+            'role' => $data['role'],
         ]);
     }
 }

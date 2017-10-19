@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('dashboard')
+@if(Auth::user()->role == 'ADMIN' || Auth::user()->role == 'PETUGAS')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -41,4 +42,20 @@
         </div>
     </div>
 </div>
+@else
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="cars card-default">
+                <div class="panel-heading">Dashboard</div>
+
+                <div class="panel-body">
+                  You're not authorized to access this page!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
 @endsection
+

@@ -7,6 +7,8 @@
         </li>
         <li class="breadcrumb-item active">Blank Page</li>
       </ol>
+      <!-- Admin redirect -->
+      <?php if(Auth::user()->role == 'ADMIN'): ?>
       <div class="row">
         <div class="col-12">
       <!-- Area Chart Example-->
@@ -47,7 +49,7 @@
           </div>
         </div>
         <div class="col-xl-12 col-sm-6 mb-3">
-          <div class="card text-white bg-danger o-hidden h-100">
+          <div class="card text-white bg-warning o-hidden h-100">
             <div class="card-body">
               <div class="card-body-icon">
                 <i class="fa fa-fw fa-money"></i>
@@ -62,6 +64,22 @@
             </a>
           </div>
         </div>
+        <div class="col-xl-12 col-sm-6 mb-3">
+          <div class="card text-white bg-danger o-hidden h-100">
+            <div class="card-body">
+              <div class="card-body-icon">
+                <i class="fa fa-fw fa-hand"></i>
+              </div>
+              <div class="mr-5">Pinjaman!</div>
+            </div>
+            <a class="card-footer text-white clearfix small z-1" href="<?php echo e(route('index.pinjaman')); ?>">
+              <span class="float-left">View Table!</span>
+              <span class="float-right">
+                <i class="fa fa-angle-right"></i>
+              </span>
+            </a>
+          </div>
+        </div>
         </div>
         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>
@@ -69,6 +87,44 @@
 
         </div>
       </div>
+      <?php elseif(Auth::user()->role == 'ANGGOTA'): ?>
+        <div class="col-xl-12 col-sm-6 mb-3">
+          <div class="card text-white bg-warning o-hidden h-100">
+            <div class="card-body">
+              <div class="card-body-icon">
+                <i class="fa fa-fw fa-money"></i>
+              </div>
+              <div class="mr-5">Simpanan!</div>
+            </div>
+            <a class="card-footer text-white clearfix small z-1" href="<?php echo e(route('index.simpanan')); ?>">
+              <span class="float-left">View Table!</span>
+              <span class="float-right">
+                <i class="fa fa-angle-right"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+        <div class="col-xl-12 col-sm-6 mb-3">
+          <div class="card text-white bg-danger o-hidden h-100">
+            <div class="card-body">
+              <div class="card-body-icon">
+                <i class="fa fa-fw fa-hand"></i>
+              </div>
+              <div class="mr-5">Pinjaman!</div>
+            </div>
+            <a class="card-footer text-white clearfix small z-1" href="<?php echo e(route('index.pinjaman')); ?>">
+              <span class="float-left">View Table!</span>
+              <span class="float-right">
+                <i class="fa fa-angle-right"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+      <?php elseif(Auth::user()->role == 'Not Activated'): ?>
+      You're access was blocked, please permission to Admin to active your account!
+      <?php else: ?>
+      You're banned!
+      <?php endif; ?>
     </div>
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->

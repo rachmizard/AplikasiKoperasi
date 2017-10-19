@@ -56,17 +56,6 @@
                   <th>Select</th>
                 </tr>
               </thead>
-              <tfoot>
-                <tr>
-                  <th>Nama</th>
-                  <th>Alamat</th>
-                  <th>No telepon</th>
-                  <th>Tempat Lahir</th>
-                  <th>Tanggal Lahir</th>
-                  <th>Aksi</th>
-                  <th>Select</th>
-                </tr>
-              </tfoot>
               <tbody>
                 <?php $__currentLoopData = $petugas; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $in): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>

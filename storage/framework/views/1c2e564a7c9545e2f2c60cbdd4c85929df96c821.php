@@ -24,6 +24,7 @@
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    <?php if(Auth::user()->role == 'ADMIN'): ?>
     <div class="collapse navbar-collapse" id="navbarResponsive">
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
@@ -47,6 +48,10 @@
             <li>
               <a href="<?php echo e(route('index.simpanan')); ?>"><i class="fa fa-fw fa-money"></i> Simpanan</a>
             </li>
+
+            <li>
+              <a href="<?php echo e(route('index.pinjaman')); ?>"><i class="fa fa-fw fa-money"></i> Pinjaman</a>
+            </li>
           </ul>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
@@ -63,6 +68,9 @@
             </li>
             <li>
               <a href="<?php echo e(route('simpanan.create')); ?>"><i class="fa fa-fw fa-plus-circle"></i> Tambah Simpanan</a>
+            </li>
+            <li>
+              <a href="<?php echo e(route('pinjaman.create')); ?>"><i class="fa fa-fw fa-plus-circle"></i> Tambah Pinjaman</a>
             </li>
           </ul>
         </li>
@@ -83,9 +91,15 @@
           <div class="dropdown-menu" aria-labelledby="messagesDropdown">
             <h6 class="dropdown-header">Account:</h6>
             <div class="dropdown-divider"></div>
+            <?php if(Auth::user()->role == 'ADMIN'): ?>
             <a class="dropdown-item" href="#">
-              <strong>Welcome ! <?php echo e(Auth::user()->email); ?></strong>
+              <strong>Welcome, you're logged in as Admin !</strong>
             </a>
+            <?php else: ?>
+            <a class="dropdown-item" href="#">
+              <strong>Welcome, you're logged in as Anggota ! <?php echo e(Auth::user()->email); ?></strong>
+            </a>
+            <?php endif; ?>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" data-toggle="modal" href="#" data-target="#exampleModal">
             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
@@ -94,6 +108,121 @@
         </li>
       </ul>
     </div>
+    <?php elseif(Auth::user()->role == 'ANGGOTA'): ?>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="<?php echo e(route('home')); ?>">
+            <i class="fa fa-fw fa-home"></i>
+            <span class="nav-link-text">Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-table"></i>
+            <span class="nav-link-text">Data</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseComponents">
+            <li>
+              <a href="<?php echo e(route('index.simpanan')); ?>"><i class="fa fa-fw fa-money"></i> Simpanan</a>
+            </li>
+            <li>
+              <a href="<?php echo e(route('index.pinjaman')); ?>"><i class="fa fa-fw fa-money"></i> Pinjaman</a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseAdd" data-parent="#exampleAccordion">
+            <i class="fa fa-fw fa-plus-circle"></i>
+            <span class="nav-link-text">Tambah data</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="collapseAdd">
+            <li>
+              <a href="<?php echo e(route('simpanan.create')); ?>"><i class="fa fa-fw fa-plus-circle"></i> Tambah Simpanan</a>
+            </li>
+            <li>
+              <a href="<?php echo e(route('pinjaman.create')); ?>"><i class="fa fa-fw fa-plus-circle"></i> Tambah Pinjaman</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="navbar-nav sidenav-toggler">
+        <li class="nav-item">
+          <a class="nav-link text-center" id="sidenavToggler">
+            <i class="fa fa-fw fa-angle-left"></i>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <?php echo e(Auth::user()->name); ?>
+
+            <i class="fa fa-fw fa-user"></i>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="messagesDropdown">
+            <h6 class="dropdown-header">Account:</h6>
+            <div class="dropdown-divider"></div>
+            <?php if(Auth::user()->role == 'ADMIN'): ?>
+            <a class="dropdown-item" href="#">
+              <strong>Welcome, you're logged in as Admin !</strong>
+            </a>
+            <?php else: ?>
+            <a class="dropdown-item" href="#">
+              <strong>Welcome, you're logged in as Anggota ! <?php echo e(Auth::user()->email); ?></strong>
+            </a>
+            <?php endif; ?>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" data-toggle="modal" href="#" data-target="#exampleModal">
+            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+        </li>
+        <li class="nav-item">
+        </li>
+      </ul>
+    </div>
+    <?php else: ?>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="<?php echo e(route('home')); ?>">
+            <i class="fa fa-fw fa-home"></i>
+            <span class="nav-link-text">Dashboard</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav sidenav-toggler">
+        <li class="nav-item">
+          <a class="nav-link text-center" id="sidenavToggler">
+            <i class="fa fa-fw fa-angle-left"></i>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <?php echo e(Auth::user()->name); ?>
+
+            <i class="fa fa-fw fa-user"></i>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="messagesDropdown">
+            <h6 class="dropdown-header">Account:</h6>
+            <div class="dropdown-divider"></div>
+            <?php if(Auth::user()->role == 'ADMIN'): ?>
+            <a class="dropdown-item" href="#">
+              <strong>Welcome, you're logged in as Admin !</strong>
+            </a>
+            <?php else: ?>
+            <a class="dropdown-item" href="#">
+              <strong>Welcome, you're logged in as Anggota ! <?php echo e(Auth::user()->email); ?></strong>
+            </a>
+            <?php endif; ?>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" data-toggle="modal" href="#" data-target="#exampleModal">
+            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+        </li>
+        <li class="nav-item">
+        </li>
+      </ul>
+    </div>
+    <?php endif; ?>
   </nav>
 <div class="content-wrapper">
   <?php echo $__env->yieldContent('dashboard'); ?>
@@ -114,8 +243,7 @@
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
             <form action="<?php echo e(route('logout')); ?>" method="POST">
-                <?php echo e(csrf_field()); ?>
-
+                {<?php echo csrf_field(); ?>}
             <button class="btn btn-secondary" type="submit">Logout</button>
             </form>
           </div>

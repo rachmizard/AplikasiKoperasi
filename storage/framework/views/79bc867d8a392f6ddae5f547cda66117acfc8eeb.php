@@ -48,39 +48,20 @@
               <thead>
                 <tr>
                   <th>Nama</th>
-                  <th>Alamat</th>
-                  <th>Tanggal Lahir</th>
-                  <th>Tempat lahir</th>
-                  <th>Jenis Kelamin</th>
-                  <th>Status</th>
-                  <th>No telepon</th>
+                  <th>Email</th>
+                  <th>Password</th>
+                  <th>Role</th>
                   <th>Aksi</th>
                   <th>Select</th>
                 </tr>
               </thead>
-              <tfoot>
-                <tr>
-                  <th>Nama</th>
-                  <th>Alamat</th>
-                  <th>Tanggal Lahir</th>
-                  <th>Tempat lahir</th>
-                  <th>Jenis Kelamin</th>
-                  <th>Status</th>
-                  <th>No telepon</th>
-                  <th>Aksi</th>
-                  <th>Select</th>
-                </tr>
-              </tfoot>
               <tbody>
                 <?php $__currentLoopData = $anggota; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $in): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 <tr>
-                <td><?php echo e($in->nama); ?></td>
-                <td><?php echo e($in->alamat); ?></td>
-                <td><?php echo e($in->tgl_lhr); ?></td>
-                <td><?php echo e($in->tmp_lahir); ?></td>
-                <td><?php echo e($in->j_kelamin); ?></td>
-                <td><?php echo e($in->status); ?></td>
-                <td><?php echo e($in->no_tlp); ?></td>
+                <td><?php echo e($in->name); ?></td>
+                <td><?php echo e($in->email); ?></td>
+                <td><?php echo e($in->password); ?></td>
+                <td><?php echo e($in->role); ?></td>
                 <td>
                     <a href="<?php echo e(route('anggota.edit', $in->id)); ?>">Edit</a>
                 </td>
@@ -104,29 +85,6 @@
     <a class="scroll-to-top rounded" href="#page-top">
       <i class="fa fa-angle-up"></i>
     </a>
-    <!-- Logout Modal-->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">×</span>
-            </button>
-          </div>
-          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-            <form action="<?php echo e(route('logout')); ?>" method="POST">
-                <?php echo e(csrf_field()); ?>
-
-            <button class="btn btn-secondary" type="submit">Logout</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
 <?php $__env->stopSection(); ?>
 
 

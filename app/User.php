@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
@@ -15,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','alamat','tgl_lhr','tmp_lahir','j_kelamin','status','no_tlp', 'role',
     ];
 
     /**
@@ -26,4 +27,24 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+}
+
+/**
+* 
+*/
+class Member extends Model
+{
+    
+    protected $table = 'users';
+    protected $primarykey = 'id';
+    protected $fillable = ['name','email','password','alamat','tgl_lhr','tmp_lahir','j_kelamin','status','no_tlp','role'];
+
+    public function simpanan(){
+        return $this->hasMany('App\Simpanan', 'id');
+    }
+
+
+    public function pinjaman(){
+        return $this->hasMany('App\Pinjaman', 'id');
+    }
 }

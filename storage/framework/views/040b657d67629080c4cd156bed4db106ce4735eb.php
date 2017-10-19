@@ -51,8 +51,10 @@
                         <th>Tanggal Simpanan</th>
                         <th>Besar Simpanan</th>
                         <th>Keterangan</th>
+                        <?php if(Auth::user()->role == 'ADMIN' || Auth::user()->role == 'PETUGAS' ): ?>
                         <th>Aksi</th>
                         <th>Select</th>
+                        <?php endif; ?>
                         </tr>
                     </thead>
                         <tbody> 
@@ -61,16 +63,18 @@
                         <?php $__currentLoopData = $simpanan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $in): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <td><?php echo e((($simpanan->currentPage() -1) * $simpanan->perPage()) + $loop->iteration); ?></td>
                         <td><?php echo e($in->nm_simpanan); ?></td>
-                        <td><?php echo e($in->anggota['nama']); ?></td>
+                        <td><?php echo e($in->member['name']); ?></td>
                         <td><?php echo e($in->tgl_simpanan); ?></td>
                         <td><?php echo e($in->besar_simpanan); ?></td>
                         <td><?php echo e($in->ket); ?></td>
+                        <?php if(Auth::user()->role == 'ADMIN' || Auth::user()->role == 'PETUGAS' ): ?>
                         <td>
                             <a href="<?php echo e(route('simpanan.edit', $in->id)); ?>">Edit</a>
                         </td>
                         <td>
                             <input style="margin-left:10px;" class="form-check-input" type="checkbox" value="<?php echo e($in->id); ?>" name="checked[]">
                         </td>
+                        <?php endif; ?>
                     	</tr>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         <?php endif; ?>

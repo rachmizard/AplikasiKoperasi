@@ -49,8 +49,10 @@
                         <th>Tanggal Simpanan</th>
                         <th>Besar Simpanan</th>
                         <th>Keterangan</th>
+                        @if(Auth::user()->role == 'ADMIN' || Auth::user()->role == 'PETUGAS' )
                         <th>Aksi</th>
                         <th>Select</th>
+                        @endif
                         </tr>
                     </thead>
                         <tbody> 
@@ -59,16 +61,18 @@
                         @foreach($simpanan as $in)
                         <td>{{ (($simpanan->currentPage() -1) * $simpanan->perPage()) + $loop->iteration }}</td>
                         <td>{{ $in->nm_simpanan }}</td>
-                        <td>{{ $in->anggota['nama'] }}</td>
+                        <td>{{ $in->member['name'] }}</td>
                         <td>{{ $in->tgl_simpanan }}</td>
                         <td>{{ $in->besar_simpanan }}</td>
                         <td>{{ $in->ket }}</td>
+                        @if(Auth::user()->role == 'ADMIN' || Auth::user()->role == 'PETUGAS' )
                         <td>
                             <a href="{{ route('simpanan.edit', $in->id) }}">Edit</a>
                         </td>
                         <td>
                             <input style="margin-left:10px;" class="form-check-input" type="checkbox" value="{{$in->id}}" name="checked[]">
                         </td>
+                        @endif
                     	</tr>
                         @endforeach
                         @endif

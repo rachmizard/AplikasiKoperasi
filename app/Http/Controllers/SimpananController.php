@@ -4,20 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Simpanan;
-use App\Anggota;
+use App\User;
 
 class SimpananController extends Controller
 {
     public function index(){
 
-    	$anggota = Anggota::all();
+    	$user = User::all()->whereIn('role',['ANGGOTA']);
     	$simpanan = Simpanan::orderBy('id', 'DESC')->paginate(10);
     	return view('simpanan.index')->with('simpanan', $simpanan);
 
     }
 
     public function create() {
-    	$anggota = Anggota::all();
+    	$anggota = User::all()->whereIn('role','ANGGOTA');
     	return view('simpanan.create', compact('anggota', $anggota));
     }
 
@@ -47,7 +47,7 @@ class SimpananController extends Controller
     public function edit($id) {
 
     	$simpanan = Simpanan::where('id', $id)->first();
-    	$anggota = Anggota::all();
+    	$anggota = User::all()->whereIn('role','ANGGOTA');
     	return view('simpanan.edit')->with('simpanan', $simpanan)->with('anggota', $anggota);
 
     }

@@ -24,7 +24,10 @@
                         <label for="alamat">Anggota</label>
                         <select class="form-control" name="id_anggota" id="alamat">
                           @foreach($anggota as $in)
-                          <option value="{{ $in->id }}">{{ $in->nama }}</option>
+                          @if(Auth::user()->role == 'ANGGOTA')
+                          <option value="{{ Auth::user()->id }}" selected>{{ Auth::user()->name }}</option>
+                          @endif
+                          <option value="{{ $in->id }}">{{ $in->name }}</option>
                           @endforeach
                         </select>
                       <div class="form-group">

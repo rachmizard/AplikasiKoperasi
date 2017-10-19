@@ -42,6 +42,15 @@ Route::prefix('home/simpanan')->group(function() {
 	Route::get('/hapusSimpanan/{id}', 'SimpananController@destroy')->name('simpanan.destroy')->middleware('auth');
 });
 
+Route::prefix('home/pinjaman')->group(function() {
+	Route::get('/', 'PeminjamanController@index')->name('index.pinjaman')->middleware('auth');
+	Route::get('/createPinjaman', 'PeminjamanController@create')->name('pinjaman.create')->middleware('auth');
+	Route::post('/storePinjaman', 'PeminjamanController@store')->name('pinjaman.store')->middleware('auth');
+	Route::get('/editPinjaman/{id}', 'PeminjamanController@edit')->name('pinjaman.edit')->middleware('auth');
+	Route::post('/updatePinjaman/{id}', 'PeminjamanController@update')->name('pinjaman.update')->middleware('auth');
+	Route::get('/hapusPinjaman/{id}', 'PeminjamanController@destroy')->name('pinjaman.destroy')->middleware('auth');
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

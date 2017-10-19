@@ -10,8 +10,8 @@ class Simpanan extends Model
     protected $primarykey = 'id';
     protected $fillable = ['nm_simpanan','id_anggota','tgl_simpanan','besar_simpanan','ket'];
 
-    public function anggota(){
-        return $this->belongsTo('App\Anggota', 'id_anggota', 'id');
+    public function member(){
+        return $this->belongsTo('App\User', 'id_anggota', 'id');
     }
 
 }

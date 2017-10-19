@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Anggota;
+use App\User;
 
 class AnggotaController extends Controller
 {
     public function index(){
 
-    	$anggota = Anggota::orderBy('id', 'DESC')->paginate(10);
+    	$anggota = User::orderBy('id', 'DESC')->whereIn('role', ['ANGGOTA','BANNED', 'Not Activated'])->paginate(10);
     	return view('anggota.index')->with('anggota', $anggota);
 
     }
@@ -20,24 +21,30 @@ class AnggotaController extends Controller
 
     public function store(Request $request){
     	$this->validate($request, [
-           'nama' => 'required', 
+           'name' => 'required', 
+           'email' => 'required',
+           'password' => 'required',
            'alamat' => 'required', 
            'tgl_lhr' => 'required',
            'tmp_lahir' => 'required',
            'j_kelamin' => 'required',
            'status' => 'required',
            'no_tlp' => 'required',
+           'role' => 'required',
         ]);
 
-    	$anggota = new Anggota();
-    	$anggota->nama = $request->nama;
-    	$anggota->alamat = $request->alamat;
-    	$anggota->tgl_lhr = $request->tgl_lhr;
-    	$anggota->tmp_lahir = $request->tmp_lahir;
-    	$anggota->j_kelamin = $request->j_kelamin;
-    	$anggota->status = $request->status;
-    	$anggota->no_tlp = $request->no_tlp;
-    	$anggota->save();
+      $user = new User();
+      $user->name = $request->name;
+      $user->email = $request->email;
+      $user->password = $request->password;
+      $user->alamat = $request->alamat;
+      $user->tgl_lhr = $request->tgl_lhr;
+      $user->tmp_lahir = $request->tmp_lahir;
+      $user->j_kelamin = $request->j_kelamin;
+      $user->status = $request->status;
+      $user->no_tlp = $request->no_tlp;
+      $user->role = $request->role;
+      $user->save();
     	return redirect('home/anggota')->with('message', 'Data berhasil di tambahkan');;
     }
 
@@ -47,33 +54,38 @@ class AnggotaController extends Controller
 
     public function edit($id) {
 
-    	$anggota = Anggota::where('id', $id)->first();
+    	$anggota = User::where('id', $id)->first();
     	return view('anggota.edit')->with('anggota', $anggota);
 
     }
 
     public function update(Request $request, $id) {
-		$this->validate($request, [
-           'nama' => 'required', 
+      $this->validate($request, [
+           'name' => 'required', 
+           'email' => 'required',
+           'password' => 'required',
            'alamat' => 'required', 
            'tgl_lhr' => 'required',
            'tmp_lahir' => 'required',
            'j_kelamin' => 'required',
            'status' => 'required',
            'no_tlp' => 'required',
+           'role' => 'required',
         ]);
 
-		$anggota = Anggota::find($id);
-    	$anggota->nama = $request->nama;
-    	$anggota->alamat = $request->alamat;
-    	$anggota->tgl_lhr = $request->tgl_lhr;
-    	$anggota->tmp_lahir = $request->tmp_lahir;
-    	$anggota->j_kelamin = $request->j_kelamin;
-    	$anggota->status = $request->status;
-    	$anggota->no_tlp = $request->no_tlp;
-    	$anggota->update();
-
-    	return redirect('home/anggota')->with('messageedit', 'Data berhasil di edit');
+      $user = User::find($id);
+      $user->name = $request->name;
+      $user->email = $request->email;
+      $user->password = $request->password;
+      $user->alamat = $request->alamat;
+      $user->tgl_lhr = $request->tgl_lhr;
+      $user->tmp_lahir = $request->tmp_lahir;
+      $user->j_kelamin = $request->j_kelamin;
+      $user->status = $request->status;
+      $user->no_tlp = $request->no_tlp;
+      $user->role = $request->role;
+      $user->update();
+      return redirect('home/anggota')->with('messageedit', 'Data berhasil di edit!');;
 
     }
 
@@ -83,7 +95,7 @@ class AnggotaController extends Controller
         if ($checked == null) {
           return redirect('home/anggota')->with('messagehapusgagal', 'Anda belum menceklis beberapa data untuk di hapus!');        
         }else{
-          Anggota::whereIn("id",$checked)->delete();
+          User::whereIn("id",$checked)->delete();
           return redirect('home/anggota')->with('messagehapus', 'Data berhasil di hapus!');        
         }
 

@@ -54,17 +54,6 @@
                   <th>Select</th>
                 </tr>
               </thead>
-              <tfoot>
-                <tr>
-                  <th>Nama</th>
-                  <th>Alamat</th>
-                  <th>No telepon</th>
-                  <th>Tempat Lahir</th>
-                  <th>Tanggal Lahir</th>
-                  <th>Aksi</th>
-                  <th>Select</th>
-                </tr>
-              </tfoot>
               <tbody>
                 @foreach($petugas as $in)
                 <tr>

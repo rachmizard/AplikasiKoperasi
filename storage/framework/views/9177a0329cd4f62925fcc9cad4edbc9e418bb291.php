@@ -1,5 +1,11 @@
 <?php $__env->startSection('dashboard'); ?>
 <div class="container">
+  <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="<?php echo e(route('index.anggota')); ?>">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active"><?php echo e(route('index.anggota')); ?></li>
+  </ol>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -17,7 +23,10 @@
                         <label for="alamat">Anggota</label>
                         <select class="form-control" name="id_anggota" id="alamat">
                           <?php $__currentLoopData = $anggota; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $in): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                          <option value="<?php echo e($in->id); ?>"><?php echo e($in->nama); ?></option>
+                          <?php if(Auth::user()->role == 'ANGGOTA'): ?>
+                          <option value="<?php echo e(Auth::user()->id); ?>" selected><?php echo e(Auth::user()->name); ?></option>
+                          <?php endif; ?>
+                          <option value="<?php echo e($in->id); ?>"><?php echo e($in->name); ?></option>
                           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </select>
                       <div class="form-group">
